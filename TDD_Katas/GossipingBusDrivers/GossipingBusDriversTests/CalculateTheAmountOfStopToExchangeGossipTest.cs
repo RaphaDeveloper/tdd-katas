@@ -98,5 +98,26 @@ namespace GossipingBusDriversTests
 
             result.Should().Be("1");
         }
+
+        [Test]
+        public void Should_Exchange_Gossip_Three_When_There_Are_Three_Drivers_With_Different_Routes_Crossing_At_Different_Time()
+        {
+            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            Driver driver1 = new Driver(route: new int[] { 1, 2, 3 });
+            Driver driver2 = new Driver(route: new int[] { 1, 4, 5 });
+            Driver driver3 = new Driver(route: new int[] { 2, 4, 6 });
+            Driver[] drivers = new Driver[]
+            {
+                driver1,
+                driver2,
+                driver3
+            };
+
+
+            string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
+
+
+            result.Should().Be("3");
+        }
     }
 }
