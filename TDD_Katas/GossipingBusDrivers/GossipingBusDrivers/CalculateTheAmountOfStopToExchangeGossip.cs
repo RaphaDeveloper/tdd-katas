@@ -19,12 +19,39 @@
 
                 if (driver1.Route[driver1.CurrentStop] == driver2.Route[driver2.CurrentStop])
                 {
+                    int amountOfGossipsOfDriver1 = driver1.AmountOfGossips;
+                    int amountOfGossipsOfDriver2 = driver2.AmountOfGossips;
+
                     if (!driver1.AmountOfGossipsByDriver.ContainsKey(driver2) || driver1.AmountOfGossipsByDriver[driver2] != driver2.AmountOfGossips)
                     {
-                        driver1.AmountOfGossipsByDriver[driver2] = driver2.AmountOfGossips;
-                        driver1.AmountOfGossips += driver2.AmountOfGossips;
+                        driver1.AmountOfGossipsByDriver.TryGetValue(driver2, out int lastAmountOfGossips);
+
+                        driver1.AmountOfGossips += (amountOfGossipsOfDriver2 - lastAmountOfGossips);
 
                         increment = true;                        
+                    }
+
+                    if (!driver2.AmountOfGossipsByDriver.ContainsKey(driver1) || driver2.AmountOfGossipsByDriver[driver1] != driver1.AmountOfGossips)
+                    {
+                        driver2.AmountOfGossipsByDriver.TryGetValue(driver1, out int lastAmountOfGossips);
+
+                        driver2.AmountOfGossips += (amountOfGossipsOfDriver1 - lastAmountOfGossips);
+
+                        increment = true;
+                    }
+
+                    driver1.AmountOfGossipsByDriver[driver2] = driver2.AmountOfGossips;
+                    driver2.AmountOfGossipsByDriver[driver1] = driver1.AmountOfGossips;
+                }
+
+                if (driver3 != null && driver1.Route[driver1.CurrentStop] == driver3.Route[driver3.CurrentStop])
+                {
+                    if (!driver1.AmountOfGossipsByDriver.ContainsKey(driver3) || driver1.AmountOfGossipsByDriver[driver3] != driver3.AmountOfGossips)
+                    {
+                        driver1.AmountOfGossipsByDriver[driver3] = driver3.AmountOfGossips;
+                        driver1.AmountOfGossips += driver3.AmountOfGossips;
+
+                        increment = true;
                     }
                 }
 
