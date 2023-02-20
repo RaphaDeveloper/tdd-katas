@@ -119,5 +119,35 @@ namespace GossipingBusDriversTests
 
             result.Should().Be("3");
         }
+
+        [Test]
+        public void Should_Exchange_Gossip_Once_When_Drivers_Cross_Each_Other_On_The_Last_Stop_Considering_They_Stop_480_Times()
+        {
+            int[] route1 = new int[480];
+            for (int i = 0; i < 479; i++)
+                route1[i] = 1;
+            
+            int[] route2 = new int[480];
+            for (int i = 0; i < 479; i++)
+                route1[i] = 2;
+            
+            route1[479] = 3;
+            route2[479] = 3;
+
+            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            Driver driver1 = new Driver(route1);
+            Driver driver2 = new Driver(route2);
+            Driver[] drivers = new Driver[]
+            {
+                driver1,
+                driver2
+            };
+
+
+            string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
+
+
+            result.Should().Be("1");
+        }
     }
 }
