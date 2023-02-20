@@ -13,7 +13,7 @@
             Driver driver2 = drivers[1];
             Driver driver3 = drivers.Length == 3 ? drivers[2] : null;
 
-            for (int min = 0; min < 480; min++)
+            for (int min = 0; min < 4; min++)
             {
                 bool increment = false;
 
