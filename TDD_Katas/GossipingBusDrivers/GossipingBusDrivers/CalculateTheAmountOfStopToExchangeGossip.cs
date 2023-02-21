@@ -7,70 +7,50 @@
             if (!drivers.Any())
                 return "Never";
             
-            int amount = 0;
-
-            Driver driver1 = drivers[0];
-            Driver driver2 = drivers[1];
-            Driver driver3 = drivers.Length == 3 ? drivers[2] : null;
+            int amount = 0;            
 
             for (int min = 0; min < 480; min++)
             {
                 bool increment = false;
 
-                if (driver1.Route[driver1.CurrentStop] == driver2.Route[driver2.CurrentStop])
+                for (int i = 0; i < drivers.Length; i++)
                 {
-                    int amountOfGossipsOfDriver1 = driver1.AmountOfGossips;
-                    int amountOfGossipsOfDriver2 = driver2.AmountOfGossips;
+                    Driver currentDriver = drivers[i];
 
-                    if (!driver1.AmountOfGossipsByDriver.ContainsKey(driver2) || driver1.AmountOfGossipsByDriver[driver2] != driver2.AmountOfGossips)
+                    for (int j = i + 1; j < drivers.Length; j++)
                     {
-                        driver1.AmountOfGossipsByDriver.TryGetValue(driver2, out int lastAmountOfGossips);
+                        Driver nextDriver = drivers[j];
 
-                        driver1.AmountOfGossips += (amountOfGossipsOfDriver2 - lastAmountOfGossips);
+                        if (currentDriver.Route[currentDriver.CurrentStop] == nextDriver.Route[nextDriver.CurrentStop])
+                        {
+                            int amountOfGossipsOfCurrentDriver = currentDriver.AmountOfGossips;
+                            int amountOfGossipsOfNextDriver = nextDriver.AmountOfGossips;
 
-                        increment = true;                        
+                            if (!currentDriver.AmountOfGossipsByDriver.ContainsKey(nextDriver) || currentDriver.AmountOfGossipsByDriver[nextDriver] != nextDriver.AmountOfGossips)
+                            {
+                                currentDriver.AmountOfGossipsByDriver.TryGetValue(nextDriver, out int lastAmountOfGossips);
+
+                                currentDriver.AmountOfGossips += (amountOfGossipsOfNextDriver - lastAmountOfGossips);
+
+                                increment = true;
+                            }
+
+                            if (!nextDriver.AmountOfGossipsByDriver.ContainsKey(currentDriver) || nextDriver.AmountOfGossipsByDriver[currentDriver] != currentDriver.AmountOfGossips)
+                            {
+                                nextDriver.AmountOfGossipsByDriver.TryGetValue(currentDriver, out int lastAmountOfGossips);
+
+                                nextDriver.AmountOfGossips += (amountOfGossipsOfCurrentDriver - lastAmountOfGossips);
+
+                                increment = true;
+                            }
+
+                            currentDriver.AmountOfGossipsByDriver[nextDriver] = nextDriver.AmountOfGossips;
+                            nextDriver.AmountOfGossipsByDriver[currentDriver] = currentDriver.AmountOfGossips;
+                        }
                     }
 
-                    if (!driver2.AmountOfGossipsByDriver.ContainsKey(driver1) || driver2.AmountOfGossipsByDriver[driver1] != driver1.AmountOfGossips)
-                    {
-                        driver2.AmountOfGossipsByDriver.TryGetValue(driver1, out int lastAmountOfGossips);
-
-                        driver2.AmountOfGossips += (amountOfGossipsOfDriver1 - lastAmountOfGossips);
-
-                        increment = true;
-                    }
-
-                    driver1.AmountOfGossipsByDriver[driver2] = driver2.AmountOfGossips;
-                    driver2.AmountOfGossipsByDriver[driver1] = driver1.AmountOfGossips;
+                    currentDriver.GoToNextStop();
                 }
-
-                if (driver3 != null && driver1.Route[driver1.CurrentStop] == driver3.Route[driver3.CurrentStop])
-                {
-                    if (!driver1.AmountOfGossipsByDriver.ContainsKey(driver3) || driver1.AmountOfGossipsByDriver[driver3] != driver3.AmountOfGossips)
-                    {
-                        driver1.AmountOfGossipsByDriver[driver3] = driver3.AmountOfGossips;
-                        driver1.AmountOfGossips += driver3.AmountOfGossips;
-
-                        increment = true;
-                    }
-                }
-
-                if (driver3 != null && driver2.Route[driver2.CurrentStop] == driver3.Route[driver3.CurrentStop])
-                {
-                    if (!driver2.AmountOfGossipsByDriver.ContainsKey(driver3) || driver2.AmountOfGossipsByDriver[driver3] != driver3.AmountOfGossips)
-                    {
-                        driver2.AmountOfGossipsByDriver[driver3] = driver3.AmountOfGossips;
-                        driver2.AmountOfGossips += driver3.AmountOfGossips;
-
-                        increment = true;
-                    }
-                }                
-
-                driver1.GoToNextStop();
-                driver2.GoToNextStop();
-
-                if (driver3 != null)
-                    driver3.GoToNextStop();
 
                 if (increment)
                     amount++;
