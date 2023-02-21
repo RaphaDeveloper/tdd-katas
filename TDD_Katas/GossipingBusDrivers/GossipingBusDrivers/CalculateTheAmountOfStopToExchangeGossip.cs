@@ -6,12 +6,12 @@
         {
             if (!drivers.Any())
                 return "Never";
-            
-            int amount = 0;            
 
-            for (int min = 0; min < 480; min++)
+            int? lastStopWithGossipsExchange = null;
+
+            for (int stop = 1; stop <= 480; stop++)
             {
-                bool increment = false;
+                bool driversExchangedGossips = false;
 
                 for (int i = 0; i < drivers.Length; i++)
                 {
@@ -32,7 +32,7 @@
 
                                 currentDriver.AmountOfGossips += (amountOfGossipsOfNextDriver - lastAmountOfGossips);
 
-                                increment = true;
+                                driversExchangedGossips = true;
                             }
 
                             if (!nextDriver.AmountOfGossipsByDriver.ContainsKey(currentDriver) || nextDriver.AmountOfGossipsByDriver[currentDriver] != currentDriver.AmountOfGossips)
@@ -41,7 +41,7 @@
 
                                 nextDriver.AmountOfGossips += (amountOfGossipsOfCurrentDriver - lastAmountOfGossips);
 
-                                increment = true;
+                                driversExchangedGossips = true;
                             }
 
                             currentDriver.AmountOfGossipsByDriver[nextDriver] = nextDriver.AmountOfGossips;
@@ -52,11 +52,11 @@
                     currentDriver.GoToNextStop();
                 }
 
-                if (increment)
-                    amount++;
+                if (driversExchangedGossips)
+                    lastStopWithGossipsExchange = stop;
             }
 
-            return amount == 0 ? "Never" : amount.ToString();
+            return lastStopWithGossipsExchange?.ToString() ?? "Never";
         }
     }
 

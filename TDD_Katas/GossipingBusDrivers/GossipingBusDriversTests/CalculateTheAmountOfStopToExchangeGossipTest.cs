@@ -96,7 +96,7 @@ namespace GossipingBusDriversTests
             string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
 
 
-            result.Should().Be("1");
+            result.Should().Be("4");
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace GossipingBusDriversTests
             string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
 
 
-            result.Should().Be("3");
+            result.Should().Be("4");
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace GossipingBusDriversTests
             string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
 
 
-            result.Should().Be("1");
+            result.Should().Be("480");
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace GossipingBusDriversTests
             string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
 
 
-            result.Should().Be("3");
+            result.Should().Be("4");
         }
 
         [Test]
@@ -191,7 +191,7 @@ namespace GossipingBusDriversTests
             string result = calculateTheAmountOfStopToExchangeGossip.Do(drivers);
 
 
-            result.Should().Be("6");
+            result.Should().Be("7");
         }
     }
 }
