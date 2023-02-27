@@ -23,29 +23,57 @@
 
                         if (currentDriver.Route[currentDriver.CurrentStop] == nextDriver.Route[nextDriver.CurrentStop])
                         {
-                            int amountOfGossipsOfCurrentDriver = currentDriver.AmountOfGossips;
-                            int amountOfGossipsOfNextDriver = nextDriver.AmountOfGossips;
-
-                            if (!currentDriver.AmountOfGossipsByDriver.ContainsKey(nextDriver) || currentDriver.AmountOfGossipsByDriver[nextDriver] != nextDriver.AmountOfGossips)
+                            bool nextDriverKnowsGossipsThatCurrentDoesNot = !currentDriver.TotalAmountOfGossipsByDriver.ContainsKey(nextDriver) || currentDriver.TotalAmountOfGossipsByDriver[nextDriver] != nextDriver.TotalAmountOfGossipsByDriver[nextDriver];
+                            if (nextDriverKnowsGossipsThatCurrentDoesNot)
                             {
-                                currentDriver.AmountOfGossipsByDriver.TryGetValue(nextDriver, out int lastAmountOfGossips);
+                                foreach (var driverAndTotalAmountOfGossips in nextDriver.TotalAmountOfGossipsByDriver)
+                                {
+                                    Driver anotherDriver = driverAndTotalAmountOfGossips.Key;
+                                    int totalAmountOfGossipsOfAnotherDriver = driverAndTotalAmountOfGossips.Value;
 
-                                currentDriver.AmountOfGossips += (amountOfGossipsOfNextDriver - lastAmountOfGossips);
+                                    if (currentDriver != anotherDriver)
+                                    {
+                                        bool currentDriverKnowsAnyGossipsOfAnotherDriver = currentDriver.TotalAmountOfGossipsByDriver.TryGetValue(anotherDriver, out int totalAmountOfGossipsOfAnotherDriverThatCurrentDriverKnows);
 
-                                driversExchangedGossips = true;
+                                        if (!currentDriverKnowsAnyGossipsOfAnotherDriver)
+                                        {
+                                            currentDriver.TotalAmountOfGossipsByDriver[currentDriver] += anotherDriver.AmountOfGossips;
+                                        
+                                            driversExchangedGossips = true;
+                                        }
+
+                                        currentDriver.TotalAmountOfGossipsByDriver[anotherDriver] = totalAmountOfGossipsOfAnotherDriver;
+                                    }
+                                }
                             }
 
-                            if (!nextDriver.AmountOfGossipsByDriver.ContainsKey(currentDriver) || nextDriver.AmountOfGossipsByDriver[currentDriver] != currentDriver.AmountOfGossips)
+
+                            bool currentDriverKnowsGossipsThatNextDoesNot = !nextDriver.TotalAmountOfGossipsByDriver.ContainsKey(currentDriver) || nextDriver.TotalAmountOfGossipsByDriver[currentDriver] != currentDriver.TotalAmountOfGossipsByDriver[currentDriver];
+                            if (currentDriverKnowsGossipsThatNextDoesNot)
                             {
-                                nextDriver.AmountOfGossipsByDriver.TryGetValue(currentDriver, out int lastAmountOfGossips);
+                                foreach (var driverAndTotalAmountOfGossips in currentDriver.TotalAmountOfGossipsByDriver)
+                                {
+                                    Driver anotherDriver = driverAndTotalAmountOfGossips.Key;
+                                    int totalAmountOfGossipsOfAnotherDriver = driverAndTotalAmountOfGossips.Value;
 
-                                nextDriver.AmountOfGossips += (amountOfGossipsOfCurrentDriver - lastAmountOfGossips);
+                                    if (nextDriver != anotherDriver)
+                                    {
+                                        bool nextDriverKnowsAnyGossipsOfAnotherDriver = nextDriver.TotalAmountOfGossipsByDriver.TryGetValue(anotherDriver, out int totalAmountOfGossipsOfAnotherDriverThatNextDriverKnows);
 
-                                driversExchangedGossips = true;
+                                        if (!nextDriverKnowsAnyGossipsOfAnotherDriver)
+                                        {
+                                            nextDriver.TotalAmountOfGossipsByDriver[nextDriver] += anotherDriver.AmountOfGossips;
+
+                                            driversExchangedGossips = true;
+                                        }
+
+                                        nextDriver.TotalAmountOfGossipsByDriver[anotherDriver] = totalAmountOfGossipsOfAnotherDriver;
+                                    }
+                                }
                             }
 
-                            currentDriver.AmountOfGossipsByDriver[nextDriver] = nextDriver.AmountOfGossips;
-                            nextDriver.AmountOfGossipsByDriver[currentDriver] = currentDriver.AmountOfGossips;
+                            currentDriver.TotalAmountOfGossipsByDriver[nextDriver] = nextDriver.TotalAmountOfGossipsByDriver[nextDriver];
+                            nextDriver.TotalAmountOfGossipsByDriver[currentDriver] = currentDriver.TotalAmountOfGossipsByDriver[currentDriver];
                         }
                     }
 
@@ -65,12 +93,14 @@
         public Driver(int[] route)
         {
             Route = route;
+            AmountOfGossips = 1;
+            TotalAmountOfGossipsByDriver[this] = AmountOfGossips;
         }
 
         public int[] Route { get; }
         public int CurrentStop { get; internal set; }
-        public int AmountOfGossips { get; internal set; } = 1;
-        public Dictionary<Driver, int> AmountOfGossipsByDriver { get; internal set; } = new Dictionary<Driver, int>();
+        public int AmountOfGossips { get; internal set; }
+        public Dictionary<Driver, int> TotalAmountOfGossipsByDriver { get; internal set; } = new Dictionary<Driver, int>();
 
         internal void GoToNextStop()
         {
