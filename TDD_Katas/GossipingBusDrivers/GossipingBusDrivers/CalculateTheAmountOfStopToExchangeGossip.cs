@@ -21,7 +21,7 @@
                     {
                         Driver nextDriver = drivers[j];
 
-                        if (currentDriver.Route[currentDriver.CurrentStop] == nextDriver.Route[nextDriver.CurrentStop])
+                        if (currentDriver.IsOnTheSameStopAs(nextDriver))
                         {
                             if (currentDriver.ShouldBeUpdatedAboutGossipsFrom(nextDriver))
                             {
@@ -102,6 +102,11 @@
 
             if (CurrentStop == Route.Length)
                 CurrentStop = 0;
+        }
+
+        internal bool IsOnTheSameStopAs(Driver anotherDriver)
+        {
+            return Route[CurrentStop] == anotherDriver.Route[anotherDriver.CurrentStop];
         }
 
         internal bool KnowsAnyGossipsOf(Driver anotherDriver)
