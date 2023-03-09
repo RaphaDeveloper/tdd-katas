@@ -33,7 +33,7 @@
 
                                     if (currentDriver != anotherDriver)
                                     {
-                                        bool currentDriverKnowsAnyGossipsOfAnotherDriver = currentDriver.TotalAmountOfGossipsByDriver.TryGetValue(anotherDriver, out int totalAmountOfGossipsOfAnotherDriverThatCurrentDriverKnows);
+                                        bool currentDriverKnowsAnyGossipsOfAnotherDriver = currentDriver.TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
 
                                         if (!currentDriverKnowsAnyGossipsOfAnotherDriver)
                                         {
@@ -58,7 +58,7 @@
 
                                     if (nextDriver != anotherDriver)
                                     {
-                                        bool nextDriverKnowsAnyGossipsOfAnotherDriver = nextDriver.TotalAmountOfGossipsByDriver.TryGetValue(anotherDriver, out int totalAmountOfGossipsOfAnotherDriverThatNextDriverKnows);
+                                        bool nextDriverKnowsAnyGossipsOfAnotherDriver = nextDriver.TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
 
                                         if (!nextDriverKnowsAnyGossipsOfAnotherDriver)
                                         {
