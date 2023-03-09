@@ -33,9 +33,7 @@
 
                                     if (currentDriver != anotherDriver)
                                     {
-                                        bool currentDriverKnowsAnyGossipsOfAnotherDriver = currentDriver.TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
-
-                                        if (!currentDriverKnowsAnyGossipsOfAnotherDriver)
+                                        if (!currentDriver.KnowsAnyGossipsOf(anotherDriver))
                                         {
                                             currentDriver.TotalAmountOfGossipsByDriver[currentDriver] += anotherDriver.AmountOfGossips;
                                         
@@ -58,9 +56,7 @@
 
                                     if (nextDriver != anotherDriver)
                                     {
-                                        bool nextDriverKnowsAnyGossipsOfAnotherDriver = nextDriver.TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
-
-                                        if (!nextDriverKnowsAnyGossipsOfAnotherDriver)
+                                        if (!nextDriver.KnowsAnyGossipsOf(anotherDriver))
                                         {
                                             nextDriver.TotalAmountOfGossipsByDriver[nextDriver] += anotherDriver.AmountOfGossips;
 
@@ -108,6 +104,11 @@
 
             if (CurrentStop == Route.Length)
                 CurrentStop = 0;
+        }
+
+        internal bool KnowsAnyGossipsOf(Driver anotherDriver)
+        {
+            return TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
         }
     }
 }
