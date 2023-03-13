@@ -13,6 +13,7 @@
             {
                 bool driversExchangedGossips = false;
 
+                //Iterating over drivers On2
                 for (int i = 0; i < drivers.Length; i++)
                 {
                     Driver currentDriver = drivers[i];
@@ -59,12 +60,19 @@
             TotalAmountOfGossipsByDriver[this] = AmountOfGossips;
         }
 
+
         public int[] Route { get; }
         public int CurrentStop { get; internal set; }
         public int AmountOfGossips { get; internal set; }
         public int TotalAmountOfGossips => TotalAmountOfGossipsByDriver[this];
         public bool GotNewGossips { get; private set; }
         public Dictionary<Driver, int> TotalAmountOfGossipsByDriver { get; internal set; } = new Dictionary<Driver, int>();
+
+
+        internal bool IsOnTheSameStopAs(Driver anotherDriver)
+        {
+            return Route[CurrentStop] == anotherDriver.Route[anotherDriver.CurrentStop];
+        }
 
         internal void GetAllNewGossipsFrom(Driver nextDriver)
         {
@@ -73,14 +81,16 @@
                     GetNewGossipsAndUpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(anotherDriver: driverAndTotalAmountOfGossips.Key, totalAmountOfGossipsOfAnotherDriver: driverAndTotalAmountOfGossips.Value);
         }
 
+        internal bool IsThereAnyNewGossipsToGetFrom(Driver anotherDriver)
+        {
+            return IsThereAnyNewGossipsToGetFrom(anotherDriver, anotherDriver.TotalAmountOfGossips);
+        }
+
         private void GetNewGossipsAndUpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(Driver anotherDriver, int totalAmountOfGossipsOfAnotherDriver)
         {
-            if (this != anotherDriver)
-            {
-                GetGossipsFrom(anotherDriver);
+            GetGossipsFrom(anotherDriver);
 
-                TotalAmountOfGossipsByDriver[anotherDriver] = totalAmountOfGossipsOfAnotherDriver;
-            }
+            UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(anotherDriver, totalAmountOfGossipsOfAnotherDriver);
         }
 
         internal void GetGossipsFrom(Driver anotherDriver)
@@ -93,6 +103,22 @@
             }
         }
 
+        private void UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(Driver anotherDriver, int totalAmountOfGossipsOfAnotherDriver)
+        {
+            if (IsThereAnyNewGossipsToGetFrom(anotherDriver, totalAmountOfGossipsOfAnotherDriver))
+                TotalAmountOfGossipsByDriver[anotherDriver] = totalAmountOfGossipsOfAnotherDriver;
+        }
+
+        internal bool IsThereAnyNewGossipsToGetFrom(Driver anotherDriver, int totalAmountOfGossipsOfAnotherDriver)
+        {
+            return !IKnowAnyGossipsOf(anotherDriver) || totalAmountOfGossipsOfAnotherDriver > TotalAmountOfGossipsByDriver[anotherDriver];
+        }
+
+        internal bool IKnowAnyGossipsOf(Driver anotherDriver)
+        {
+            return TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
+        }
+
         internal void GoToNextStop()
         {
             CurrentStop++;
@@ -101,21 +127,6 @@
                 CurrentStop = 0;
 
             GotNewGossips = false;
-        }
-
-        internal bool IsOnTheSameStopAs(Driver anotherDriver)
-        {
-            return Route[CurrentStop] == anotherDriver.Route[anotherDriver.CurrentStop];
-        }
-
-        internal bool IKnowAnyGossipsOf(Driver anotherDriver)
-        {
-            return TotalAmountOfGossipsByDriver.ContainsKey(anotherDriver);
-        }
-
-        internal bool IsThereAnyNewGossipsToGetFrom(Driver anotherDriver)
-        {
-            return !IKnowAnyGossipsOf(anotherDriver) || TotalAmountOfGossipsByDriver[anotherDriver] != anotherDriver.TotalAmountOfGossips;
         }
     }
 }
