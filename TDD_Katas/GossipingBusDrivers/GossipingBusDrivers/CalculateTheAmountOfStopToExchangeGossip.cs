@@ -42,11 +42,10 @@
             if (currentDriver.IsOnTheSameStopAs(nextDriver))
             {
                 currentDriver.GetAllNewGossipsFrom(nextDriver);
-
                 nextDriver.GetAllNewGossipsFrom(currentDriver);
 
-                nextDriver.TotalAmountOfGossipsByDriver[currentDriver] = currentDriver.TotalAmountOfGossips;
-                currentDriver.TotalAmountOfGossipsByDriver[nextDriver] = nextDriver.TotalAmountOfGossips;
+                currentDriver.UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(nextDriver);
+                nextDriver.UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(currentDriver);
             }
         }
     }
@@ -101,6 +100,11 @@
 
                 GotNewGossips = true;
             }
+        }
+
+        internal void UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(Driver anotherDriver)
+        {
+            UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(anotherDriver, anotherDriver.TotalAmountOfGossips);
         }
 
         private void UpdateTotalAmountOfGossipsIKnowThatAnotherDriverKnows(Driver anotherDriver, int totalAmountOfGossipsOfAnotherDriver)
