@@ -3,7 +3,7 @@ using GossipingBusDrivers;
 
 namespace GossipingBusDriversTests
 {
-    public class Tests
+    public class CalculateTheAmountOfStopToExchangeGossipsTests
     {
         [SetUp]
         public void Setup()
@@ -13,7 +13,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Never_Exchange_Gossip_When_Drivers_Dont_Cross_Each_Other()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 2, 1, 2 });
             Driver driver2 = new Driver(route: new int[] { 5, 2, 8 });
             Driver[] drivers = new Driver[] 
@@ -32,7 +32,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Necessary_One_Stop_To_Exchange_All_Gossips_When_There_Is_Two_Drivers_And_They_Cross_Each_Other_On_The_First_Stop()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 1, 2, 3 });
             Driver driver2 = new Driver(route: new int[] { 1, 4, 5 });
             Driver[] drivers = new Driver[] 
@@ -51,7 +51,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Never_Exchange_Gossip_When_There_Is_No_Drivers()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver[] drivers = new Driver[0];
 
 
@@ -64,7 +64,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Necessary_One_Stop_To_Exchange_All_Gossips_When_There_Is_Two_Drivers_And_They_Cross_Each_Other_On_The_First_Stop_Even_If_They_Cross_Each_Other_More_Than_Once()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 1, 2, 3 });
             Driver driver2 = new Driver(route: new int[] { 1, 2, 3 });
             Driver[] drivers = new Driver[]
@@ -83,7 +83,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Necessary_Four_Stops_To_Exchange_All_Gossips_When_There_Is_Two_Drivers_And_They_Cross_Each_Other_On_The_Fourth_Stop()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 1, 2, 3 });
             Driver driver2 = new Driver(route: new int[] { 4, 1 });
             Driver[] drivers = new Driver[]
@@ -102,7 +102,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Necessary_Four_Stops_To_Exchange_All_Gossips_When_There_Are_Three_Drivers_With_Different_Routes_Crossing_At_Different_Time_Considering_That_Driver_Two_Cross_All_Other_Drivers()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 1, 2, 3 });
             Driver driver2 = new Driver(route: new int[] { 1, 4, 5 });
             Driver driver3 = new Driver(route: new int[] { 2, 4, 6 });
@@ -134,7 +134,7 @@ namespace GossipingBusDriversTests
             route1[479] = 3;
             route2[479] = 3;
 
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route1);
             Driver driver2 = new Driver(route2);
             Driver[] drivers = new Driver[]
@@ -153,7 +153,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Necessary_Four_Stops_To_Exchange_All_Gossips_When_There_Are_Three_Drivers_With_Different_Routes_Crossing_At_Different_Time_Considering_That_Driver_One_Cross_All_Other_Drivers()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 1, 4, 3 });
             Driver driver2 = new Driver(route: new int[] { 1, 2, 5 });
             Driver driver3 = new Driver(route: new int[] { 2, 4, 6 });
@@ -174,7 +174,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Necessary_Seven_Stops_When_There_Are_Four_Drivers_With_Different_Routes_Crossing_At_Different_Time()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 1, 4, 3 });
             Driver driver2 = new Driver(route: new int[] { 1, 2, 5 });
             Driver driver3 = new Driver(route: new int[] { 2, 4, 6 });
@@ -197,7 +197,7 @@ namespace GossipingBusDriversTests
         [Test]
         public void Should_Be_Possible_To_Calculate_The_Amount_Of_Stops_When_Drivers_Has_Different_Routes_Size()
         {
-            CalculateTheAmountOfStopToExchangeGossip calculateTheAmountOfStopsToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossip();
+            CalculateTheAmountOfStopToExchangeGossips calculateTheAmountOfStopsToExchangeGossip = new CalculateTheAmountOfStopToExchangeGossips();
             Driver driver1 = new Driver(route: new int[] { 3, 1, 2, 3 });
             Driver driver2 = new Driver(route: new int[] { 3, 2, 3, 1 });
             Driver driver3 = new Driver(route: new int[] { 4, 2, 3, 4, 5 });
