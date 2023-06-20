@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeFactors\PrimeFactors.csproj" />
+    <ProjectReference Include="..\Yatzy\Yatzy.csproj" />
   </ItemGroup>
 
 </Project>
