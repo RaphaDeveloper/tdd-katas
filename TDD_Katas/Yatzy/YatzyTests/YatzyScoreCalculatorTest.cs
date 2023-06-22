@@ -319,7 +319,7 @@ namespace YatzyTests
         }
 
         [Fact]
-        public void The_Score_For_Small_Straight_Should_Be_15_Wich_Is_The_Sum_Of_Of_The_First_Five_Numbers_If_They_Are_From_1_To_5_In_Sequence()
+        public void The_Score_For_Small_Straight_Should_Be_15_Wich_Is_The_Sum_Of_The_First_Five_Numbers_If_They_Are_From_1_To_5_In_Sequence()
         {
             int[] roll = new int[] { 1, 2, 3, 4, 5, 5 };
             Category category = Category.SmallStraight;
@@ -343,7 +343,7 @@ namespace YatzyTests
         }
 
         [Fact]
-        public void The_Score_For_Large_Straight_Should_Be_20_Wich_Is_The_Sum_Of_Of_The_Last_Five_Numbers_If_They_Are_From_1_To_5_In_Sequence()
+        public void The_Score_For_Large_Straight_Should_Be_20_Wich_Is_The_Sum_Of_The_Last_Five_Numbers_If_They_Are_From_2_To_6_In_Sequence()
         {
             int[] roll = new int[] { 2, 2, 3, 4, 5, 6 };
             Category category = Category.LargeStraight;
