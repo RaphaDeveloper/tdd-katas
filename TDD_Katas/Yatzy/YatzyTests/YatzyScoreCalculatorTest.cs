@@ -19,7 +19,7 @@ namespace YatzyTests
         }
 
         [Fact]
-        public void The_Score_For_Yagzy_Category_Should_Be_50_When_All_Dice_Are_Equal()
+        public void The_Score_For_Yatzy_Category_Should_Be_50_When_All_Dice_Are_Equal()
         {
             int[] roll = new int[] { 1, 1, 1, 1, 1};
             Category category = Category.Yatzy;
@@ -31,7 +31,7 @@ namespace YatzyTests
         }
 
         [Fact]
-        public void The_Score_For_Yagzy_Category_Should_Be_0_When_All_Dice_Are_Not_Equal()
+        public void The_Score_For_Yatzy_Category_Should_Be_0_When_All_Dice_Are_Not_Equal()
         {
             int[] roll = new int[] { 1, 1, 1, 1, 6 };
             Category category = Category.Yatzy;
