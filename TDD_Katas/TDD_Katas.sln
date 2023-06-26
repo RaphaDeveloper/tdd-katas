@@ -29,15 +29,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FizzBuzzTests", "FizzBuzz\F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrimeFactors", "PrimeFactors", "{1D890287-1E08-4BE4-942B-E6655912BDEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeFactors", "PrimeFactors\PrimeFactors\PrimeFactors.csproj", "{F02376C3-1D40-4154-B2CA-067CE554DBB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeFactors", "PrimeFactors\PrimeFactors\PrimeFactors.csproj", "{F02376C3-1D40-4154-B2CA-067CE554DBB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeFactorsTests", "PrimeFactors\PrimeFactorsTests\PrimeFactorsTests.csproj", "{71774675-5BC6-4D4B-B6BD-94F5F9BA54FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeFactorsTests", "PrimeFactors\PrimeFactorsTests\PrimeFactorsTests.csproj", "{71774675-5BC6-4D4B-B6BD-94F5F9BA54FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Yatzy", "Yatzy", "{342EA3E9-9A53-4058-887D-8765E16CD252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yatzy", "Yatzy\Yatzy\Yatzy.csproj", "{DD779F01-5674-4478-AACE-E7A268041F4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yatzy", "Yatzy\Yatzy\Yatzy.csproj", "{DD779F01-5674-4478-AACE-E7A268041F4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyTests", "Yatzy\YatzyTests\YatzyTests.csproj", "{A55A16F4-A123-4836-BA08-954A22BB6A5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YatzyTests", "Yatzy\YatzyTests\YatzyTests.csproj", "{A55A16F4-A123-4836-BA08-954A22BB6A5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RobotMoves", "RobotMoves", "{EDBC79DD-2ABB-42D8-B75E-C3822F8515BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotMoves", "RobotMoves\RobotMoves\RobotMoves.csproj", "{CDFDC430-AECC-4025-A6CB-7A239A803FD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RobotMovesTests", "RobotMoves\RobotMovesTests\RobotMovesTests.csproj", "{062DF740-E3E4-4DC5-8F63-B23EB0738218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +99,14 @@ Global
 		{A55A16F4-A123-4836-BA08-954A22BB6A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A55A16F4-A123-4836-BA08-954A22BB6A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A55A16F4-A123-4836-BA08-954A22BB6A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFDC430-AECC-4025-A6CB-7A239A803FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFDC430-AECC-4025-A6CB-7A239A803FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFDC430-AECC-4025-A6CB-7A239A803FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFDC430-AECC-4025-A6CB-7A239A803FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062DF740-E3E4-4DC5-8F63-B23EB0738218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062DF740-E3E4-4DC5-8F63-B23EB0738218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062DF740-E3E4-4DC5-8F63-B23EB0738218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062DF740-E3E4-4DC5-8F63-B23EB0738218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +124,8 @@ Global
 		{71774675-5BC6-4D4B-B6BD-94F5F9BA54FC} = {1D890287-1E08-4BE4-942B-E6655912BDEE}
 		{DD779F01-5674-4478-AACE-E7A268041F4A} = {342EA3E9-9A53-4058-887D-8765E16CD252}
 		{A55A16F4-A123-4836-BA08-954A22BB6A5E} = {342EA3E9-9A53-4058-887D-8765E16CD252}
+		{CDFDC430-AECC-4025-A6CB-7A239A803FD5} = {EDBC79DD-2ABB-42D8-B75E-C3822F8515BD}
+		{062DF740-E3E4-4DC5-8F63-B23EB0738218} = {EDBC79DD-2ABB-42D8-B75E-C3822F8515BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97316BE0-C200-4DAF-A056-773014E0562E}
