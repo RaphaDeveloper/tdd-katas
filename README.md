@@ -1,1 +1,1 @@
-Here you will find codes I wrote when practicing TDD.
+Here you will find codes I wrote while practicing TDD.
